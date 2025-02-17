@@ -1,0 +1,71 @@
+openapi: 3.0.3
+info:
+  title: start
+  description: "API utilizada para gerar arquivos de exemplo atraves do VSCode"
+  version: 0.0.1
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /start:
+    get:
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                title: start
+                description: "Schema of Initial Parameters file "
+                required:
+                  - env
+                  - version
+                  - appID
+                  - satSN
+                  - services
+                  - holderData
+                  - certs
+                  - syncTime
+                properties:
+                  env:
+                    $ref: "../schemas/environment.yml"
+                  version:
+                    $ref: "../schemas/version.yml"
+                  appID:
+                    $ref: "../schemas/satIdentify.yml"
+                  satSN:
+                    $ref: "../schemas/satSerialNumber.yml"
+                  services:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - endpoints
+                        - port
+                      properties:
+                        endpoints:
+                          type: array
+                          items:
+                            type: string
+                          example: ["192.168.10.100"]
+                        port:
+                          type: integer
+                          example: 443
+                        SatBeat:
+                          example: "api/sat/beat"
+                        SatToken:
+                          example: "api/sat/token"
+                        SatStart:
+                          example: "api/sat/start"
+                        SatHolder:
+                          example: "api/sat/holder"
+                  holders:
+                    type: array
+                    items:
+                      $ref: "../schemas/holders.yml"
+                  certs:
+                    type: array
+                    items:
+                      $ref: "../schemas/certsX509.yml"
+                  syncTime:
+                    $ref: "../schemas/syncTime.yml"

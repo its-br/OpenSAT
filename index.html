@@ -1,0 +1,127 @@
+<!-- HTML for static distribution bundle build -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Swagger OpenSAT</title>
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" type="text/css" href="./swagger-ui.css" />
+    
+    <style>
+
+      html
+      {
+        box-sizing: border-box;
+        overflow: -moz-scrollbars-vertical;
+        overflow-y: scroll;
+      }
+      *,
+      *:before,
+      *:after
+      {
+        box-sizing: inherit;
+        text-decoration: inherit;
+      }
+      body
+      {
+        margin: 0;
+        font-family: Helvetica Neue LT,Helvetica Neue,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;
+        font-weight: 400;
+        font-size: 1rem;
+      }
+      .body-container{
+        margin-top: 0;
+        margin-left: 50px;
+        margin-right: 50px;
+      }
+      .title{
+        font-family: sans-serif;
+      }
+      header, section{
+        background-color: #1e88e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="mdc-top-app-bar">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <div class="d-flex align-center">
+            <img class="shrink mr-2" width="40" contain transition="scale-transition"
+              src=""/>
+          </div>
+          <span class="mdc-top-app-bar__title" style="padding: 0px;">Open SAT</span>
+        </section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+          <a href="/" class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" >exit_to_app</a>
+        </section>
+      </div>
+    </header>
+    <main class="body-container mdc-top-app-bar--fixed-adjust">
+      <!-- <div class="content"> -->
+        <h1 class="title">OpenSAT APIs</h1>
+        <table class="mdc-data-table__table">
+          <thead>
+            <tr class="mdc-data-table__header-row">
+              <th class="mdc-data-table__header-cell"><strong>API Name</strong></th>
+              <th class="mdc-data-table__header-cell"><strong>Description</strong></th>
+              <th class="mdc-data-table__header-cell"><strong>Spec. Ref. </strong></th>
+            </tr>
+          </thead>
+          <tbody class="mdc-data-table__content">
+            <tr class="mdc-data-table__row">
+              <td class="mdc-data-table__cell">
+                <a href="api.html?urls.primaryName=AppParametersAPI">AppParametersAPI</a>
+              </td>
+              <td class="mdc-data-table__cell">Rest API for manage AppParameters.</td>
+              <td class="mdc-data-table__cell">v1.0</td>
+            </tr>
+            <tr class="mdc-data-table__row">
+              <td class="mdc-data-table__cell">
+                <a href="api.html?urls.primaryName=FactoryParametersAPI">FactoryParametersAPI</a>
+              </td>
+              <td class="mdc-data-table__cell">Rest API for manage FactoryParameters.</td>
+              <td class="mdc-data-table__cell">v1.0</td>
+            </tr>
+            <tr class="mdc-data-table__row">
+              <td class="mdc-data-table__cell">
+                <a href="api.html?urls.primaryName=InitParametersAPI">InitParametersAPI</a>
+              </td>
+              <td class="mdc-data-table__cell">Rest API for manage InitParameters.</td>
+              <td class="mdc-data-table__cell">v1.0</td>
+            </tr>
+            <tr class="mdc-data-table__row">
+              <td class="mdc-data-table__cell">
+                <a href="api.html?urls.primaryName=BlockParametersAPI">BlockParametersAPI</a>
+              </td>
+              <td class="mdc-data-table__cell">Rest API for manage BlockParameters.</td>
+              <td class="mdc-data-table__cell">v1.0</td>
+            </tr>
+            <tr class="mdc-data-table__row">
+              <td class="mdc-data-table__cell">
+                <a href="api.html?urls.primaryName=HolderParametersAPI">HolderParametersAPI</a>
+              </td>
+              <td class="mdc-data-table__cell">Rest API for manage HolderParameters.</td>
+              <td class="mdc-data-table__cell">v1.0</td>
+            </tr>
+            <tr class="mdc-data-table__row">
+              <td class="mdc-data-table__cell">
+                <a href="api.html?urls.primaryName=SATParametersAPI">SATParametersAPI</a>
+              </td>
+              <td class="mdc-data-table__cell">Rest API for manage SATParameters.</td>
+              <td class="mdc-data-table__cell">v1.0</td>
+            </tr>
+          </tbody>
+        </table>
+      <!-- </div> -->
+    </main>
+
+    <script src="./swagger-ui-bundle.js" charset="UTF-8"> </script>
+    <script src="./swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
+
+  </body>
+</html>

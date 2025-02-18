@@ -45,12 +45,15 @@
       // Begin Swagger UI call region
       const ui = SwaggerUIBundle({
         urls: [
-          {url:"./sat/AppParameters.yml", name: "AppParametersAPI"},
-          {url:"./sat/FactoryParameters.yml", name: "FactoryParametersAPI"},
-          {url:"./sat/InitParameters.yml", name: "InitParametersAPI"},
-          {url:"./sat/BlockParameters.yml", name: "BlockParametersAPI"},
-          {url:"./sat/HolderParameters.yml", name: "HolderParametersAPI"},
-          {url:"./sat/SATParameters.yml", name: "SATParametersAPI"},
+          {url:"./sat/SatBeat.yml", name: "SatBeat"},
+          {url:"./sat/SatCertification.yml", name: "SatCertification"},
+          {url:"./sat/SatHolder.yml", name: "SatHolder"},
+          {url:"./sat/SatManagement.yml", name: "SatManagement"},
+          {url:"./sat/SatParametersAPP.yml", name: "SatParametersAPP"},
+          {url:"./sat/SatParametersSAT.yml", name: "SatParametersSAT"},
+          {url:"./sat/SatStart.yml", name: "SatStart"},
+          {url:"./sat/SatTokenAccess.yml", name: "SatTokenAccess"},
+          {url:"./sat/SatTokenRevoke.yml", name: "SatTokenRevoke"},
         ],
         dom_id: '#swagger-ui',
         deepLinking: true,

@@ -1,0 +1,62 @@
+openapi: 3.0.3
+info:
+  title: SatTokenRevoke
+  description: API utilizada para gerar arquivos de exemplo através do VSCode
+  version: 0.0.1
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /api/sat/token-revoke:
+    post:
+      summary: Revoke OAuth 2.0 access token
+      description: Revoke OAuth 2.0 access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/satTokenRevokeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/satTokenRevokeResponse'
+        '400':
+          description: 400 | Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 400 | Bad Request
+components:
+  schemas:
+    accessToken:
+      type: string
+      title: accessToken
+      description: The Access Token
+      example: eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImp3ayI6eyJrdHkiOiJFQyIsImNydiI6IlAtMjU2IiwieCI6ImtoM3JIbS1xcDhYN3Exdm1qTl9fZGlualJHRTFvcEdKTjFDX1lsTnNvTUEiLCJ5IjoicG1aS1o1ZFo5eEQ3R0ZYYmVCSmNWUnRwVHZVNjROc0h6YmMtQnRHdFE1VSJ9fQ.eyJkYXRhIjoiZXhlbXBsbyBkZSBkb2N1bWVudG8gSlNPTiJ9.hH_3oZKMyDzbYHIEjCJWgGuKOrTwexrX4SJ-hh1njRvoa2cR8wnATt4rLdpj4ApKQt8unIDBukNOQ3_XkpOPPQ
+    satTokenRevokeRequest:
+      type: object
+      title: satTokenRevokeRequest
+      description: 'Schema of Initial Parameters file '
+      properties:
+        access_token:
+          $ref: '#/components/schemas/accessToken'
+    satTokenRevokeResponse:
+      type: object
+      title: satTokenRevokeResponse
+      description: 'Schema of Initial Parameters file '
+      properties:
+        success:
+          type: boolean
+          description: Indica se a revogação do token foi bem-sucedida.
+          example: true
+        message:
+          type: string
+          description: Mensagem de confirmação.
+          example: Token revogado com sucesso.

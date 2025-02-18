@@ -1,0 +1,188 @@
+openapi: 3.0.3
+info:
+  title: satCertification
+  description: API utilizada para gerar arquivos de exemplo através do VSCode
+  version: 0.0.1
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /api/sat/certification:
+    post:
+      summary: Carry out the certification process
+      description: Carry out the certification process
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/satCertificationRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/satCertificationResponse'
+        '400':
+          description: 400 | Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 400 | Bad Request
+components:
+  schemas:
+    environment:
+      type: string
+      title: env
+      description: |
+        Defines the execution environment:
+         - `test`: Development testing environment.
+         - `stage`: Pre-production testing environment.
+         - `prod`: Production environment.
+      enum:
+        - test
+        - stage
+        - prod
+      example: test
+    version:
+      type: string
+      title: version
+      description: 'Schema of Version of Parameters File, using a major.minor.patch versioning scheme (Ex.: 2.1.3)'
+      pattern: ^\d+\.\d+\.\d+$
+      example: 2.0.0
+    identitySat:
+      type: string
+      title: SatID
+      description: Schema of SAT ID
+      minLength: 1
+      maxLength: 64
+      pattern: ^SAT\d{21}$
+      example: SAT12345678900001823
+    serialNumber:
+      type: string
+      title: SAT Serial Number
+      format: uuid
+      description: Schema of SAT Serial Number, use the format UUIDv4
+      minLength: 32
+      maxLength: 36
+      pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89a-bA-B][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+      example: FA59BA20-E176-4597-B211-6F5DE7109D7A
+    accessToken:
+      type: string
+      title: accessToken
+      description: The Access Token
+      example: eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImp3ayI6eyJrdHkiOiJFQyIsImNydiI6IlAtMjU2IiwieCI6ImtoM3JIbS1xcDhYN3Exdm1qTl9fZGlualJHRTFvcEdKTjFDX1lsTnNvTUEiLCJ5IjoicG1aS1o1ZFo5eEQ3R0ZYYmVCSmNWUnRwVHZVNjROc0h6YmMtQnRHdFE1VSJ9fQ.eyJkYXRhIjoiZXhlbXBsbyBkZSBkb2N1bWVudG8gSlNPTiJ9.hH_3oZKMyDzbYHIEjCJWgGuKOrTwexrX4SJ-hh1njRvoa2cR8wnATt4rLdpj4ApKQt8unIDBukNOQ3_XkpOPPQ
+    certsCSR:
+      type: string
+      title: csr
+      description: CSR - Certificate Signing Request
+      example: MIHzMIGaAgEAMDgxFDASBgNVBAMMC1NlbGYtU2lnbmVkMRMwEQYDVQQKDApNeSBDb21wYW55MQswCQYDVQQGEwJVUzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABFcXn1Xrzf66HU2RDF1PqVXSC5/7PoQ3IJsCMtpiaU3j/1FZU8RAh+z0H8XmEyq3oHwyOIh/c8qbKSUTytq0+V+gADAKBggqhkjOPQQDAgNIADBFAiA7bR15NMwx3vH1Sui2tzHF5//kcDy8iXR2+7O6BvhQ4AIhAIPBHkcdS/R1EFIqJQerWBoj2fuGd1LMZWM1e4Pej6uZ
+    satCertificationRequest:
+      type: object
+      title: satCertificationRequest
+      description: 'Schema of Initial Parameters file '
+      required:
+        - env
+        - version
+        - appID
+        - satID
+        - satSN
+        - accessToken
+        - certType
+        - csr
+      properties:
+        env:
+          $ref: '#/components/schemas/environment'
+        version:
+          $ref: '#/components/schemas/version'
+        appID:
+          $ref: '#/components/schemas/identitySat'
+        satID:
+          $ref: '#/components/schemas/identitySat'
+        satSN:
+          $ref: '#/components/schemas/serialNumber'
+        accessToken:
+          $ref: '#/components/schemas/accessToken'
+        certType:
+          type: string
+          example: CSR
+        csr:
+          $ref: '#/components/schemas/certsCSR'
+    cmd:
+      type: boolean
+      title: cmd
+      description: Schema of command
+      example: true
+    certsX509:
+      type: object
+      title: certs
+      description: JSON Web Key (JWK) as defined in RFC 7517 (https://datatracker.ietf.org/doc/html/rfc7517)
+      required:
+        - use
+        - kty
+        - x5c
+      properties:
+        key_ops:
+          type: array
+          description: 'Intended use of the key (e.g., signature or encryption). See RFC 7517 #section-4.3'
+          enum:
+            - sign
+            - verify
+            - encrypt
+            - decrypt
+            - wrapKey
+            - unwrapKey
+            - deriveKey
+            - deriveBits
+          example:
+            - sign
+            - encrypt
+        kty:
+          type: string
+          description: 'Cryptographic key type. See RFC 7517 #section-4.1'
+          example: EC
+        crv:
+          type: string
+          description: 'EC key specific curve. See RFC 7517 #section-4.2'
+          example: P-256
+        x5c:
+          type: array
+          description: 'X.509 Certificate Chain. See RFC 7517 #section-4.7'
+          example:
+            - MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAt5Sk8kt0cdTDP2Nya8B2...
+            - MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAt5Sk8kt0cdTDP2Nya8B2...
+            - MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAt5Sk8kt0cdTDP2Nya8B2...
+    satCertificationResponse:
+      type: object
+      title: satCertificationResponse
+      description: 'Schema of Initial Parameters file '
+      required:
+        - env
+        - version
+        - appID
+        - satID
+        - satSN
+        - appCmd
+        - satCmd
+        - crt
+      properties:
+        env:
+          $ref: '#/components/schemas/environment'
+        version:
+          $ref: '#/components/schemas/version'
+        appID:
+          $ref: '#/components/schemas/identitySat'
+        satID:
+          $ref: '#/components/schemas/identitySat'
+        satSN:
+          $ref: '#/components/schemas/serialNumber'
+        appCmd:
+          $ref: '#/components/schemas/cmd'
+        satCmd:
+          $ref: '#/components/schemas/cmd'
+        crt:
+          $ref: '#/components/schemas/certsX509'

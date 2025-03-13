@@ -6,7 +6,7 @@ info:
 servers:
   - url: https://api.server.test/v1
 paths:
-  /api/sat/beat:
+  /api/sat/command:
     post:
       summary: Request SAT Commands 
       description: Request SAT Commands and return the response of execution
@@ -95,7 +95,7 @@ components:
             $ref: '#/components/schemas/CommandResult'
     Command:
       type: object
-      title: command
+      title: Command
       description: Schema the Command
       required:
         - id
@@ -123,7 +123,7 @@ components:
           example: 'lorem ipsum dolor sit amet' 
     CommandResult:
       type: object
-      title: command
+      title: CommandResult
       description: Schema of Result of execution of the Command
       properties:
         id:
